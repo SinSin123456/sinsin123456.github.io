@@ -5,15 +5,63 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Raksa Thy Portfolio</title>
+
+    <!-- SEO Meta -->
+    <meta name="description"
+        content="Raksa Thy's portfolio - A Computer Science student passionate about software development and innovative tech solutions. View my projects and CV.">
+    <meta name="keywords"
+        content="Raksa Thy, Portfolio, Computer Science, Software Developer, Projects, Spring Boot, Python, MySQL, Cambodia">
+    <meta name="author" content="Raksa Thy">
+
+    <meta property="og:title" content="Raksa Thy Portfolio" />
+    <meta property="og:description"
+        content="Explore Raksa Thy's projects and experience as a Computer Science student and aspiring software developer." />
+    <meta property="og:type" content="website" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+    <!-- bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: #ffffff;
+            color: #000000;
         }
 
-        .navbar-nav a {
+        .navbar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            background-color: #ffffff;
+            transition: background-color 0.3s;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .navbar-nav {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .navbar-nav .nav-link {
             color: #ff4d4d !important;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: color 0.3s;
         }
 
         .hero {
@@ -26,19 +74,28 @@
 
         .hero-text {
             max-width: 600px;
+            font-size: 1.25rem;
+        }
+
+        .hero h3 {
+            font-size: 2rem;
         }
 
         .hero img {
-            width: 180px;
-            height: 180px;
+            width: 300px;
+            height: 300px;
             border-radius: 50%;
             object-fit: cover;
+            margin-top: -50px;
         }
 
         .btn-custom {
             background-color: #3fd1c4;
             color: white;
             border: none;
+            font-size: 1rem;
+            padding: 0.6rem 1.2rem;
+            transition: background-color 0.3s;
         }
 
         .btn-custom:hover {
@@ -51,6 +108,7 @@
             padding: 1rem;
             text-align: center;
             margin-bottom: 2rem;
+            transition: background-color 0.3s;
         }
 
         .project-card img {
@@ -63,70 +121,348 @@
         footer {
             text-align: center;
             padding: 1rem;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            margin-top: 2rem;
+            background-color: #f5f5f5;
+            transition: background-color 0.3s;
+        }
+
+        a {
+            transition: color 0.3s;
+        }
+
+        /* dark mode */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e4e4e4;
+        }
+
+        body.dark-mode .navbar {
+            background-color: #1e1e1e;
+        }
+
+        body.dark-mode .navbar-nav .nav-link {
+            color: #ffaaaa !important;
+        }
+
+        body.dark-mode .hero-text,
+        body.dark-mode .hero h3 {
+            color: #ffffff;
+        }
+
+        body.dark-mode .btn-custom {
+            background-color: #00bfa6;
+            color: #ffffff;
+        }
+
+        body.dark-mode .btn-custom:hover {
+            background-color: #009f8a;
+        }
+
+        body.dark-mode .project-card {
+            background-color: #1f2b30;
+        }
+
+        body.dark-mode footer {
+            background-color: #1e1e1e;
+            color: #cccccc;
+        }
+
+        body.dark-mode a.text-dark,
+        body.dark-mode a {
+            color: #dddddd !important;
+        }
+
+        body.dark-mode a:hover {
+            color: #ffffff !important;
+        }
+
+        .toggle-switch {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            user-select: none;
+        }
+
+        .switch-label {
+            display: block;
+            width: 50px;
+            height: 25px;
+            background-color: #ccc;
+            border-radius: 25px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .switch-ball {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 21px;
+            height: 21px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .toggle-switch:checked+.switch-label {
+            background-color: #00bfa6;
+        }
+
+        .toggle-switch:checked+.switch-label .switch-ball {
+            transform: translateX(25px);
+        }
+
+        body.dark-mode .dark-mode-toggle .switch-label {
+            background-color: #555;
+        }
+
+        /* skills */
+        #skills i {
+            transition: transform 0.3s ease;
+        }
+
+        #skills i:hover {
+            transform: scale(1.2);
+        }
+
+        body.dark-mode #skills i {
+            color: #80cbc4;
+        }
+
+        body.dark-mode #skills h5,
+        body.dark-mode #skills p {
+            color: #e4e4e4;
+        }
+
+        body.dark-mode .list-group-item {
+            background-color: #1e1e1e;
+            color: #f1f1f1;
+            border-color: #333;
+        }
+
+        body.dark-mode .list-group-item:hover {
+            background-color: #2a2a2a;
+        }
+
+        /* contact */
+        .contact-links {
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #222;
+            font-size: 1.1rem;
+            padding: 10px 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .contact-item:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode .contact-item {
+            background-color: #222;
+            color: #eee;
+        }
+
+        body.dark-mode .contact-item:hover {
+            background-color: #333;
         }
     </style>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Raksa Thy",
+            "jobTitle": "Computer Science Student",
+            "description": "Aspiring software developer with a passion for building innovative tech solutions."
+        }
+    </script>
 </head>
 
 <body>
-
-    
-    <nav class="navbar navbar-light bg-white px-4 py-3">
-        <a class="navbar-brand fw-bold" href="#">RAKSA THY</a>
-        <ul class="navbar-nav flex-row gap-4">
-            <li class="nav-item"><a class="nav-link" href="#">About me</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Projects</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+    <nav class="navbar">
+        <a class="navbar-brand " href="#">RAKSA THY</a>
+        <ul class="navbar-nav ">
+            <li class="nav-item"><a class="nav-link" href="#about">About me</a></li>
+            <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
+
+        <!-- dark mode -->
+        <div class="dark-mode-toggle">
+            <input type="checkbox" id="darkModeSwitch" class="toggle-switch" />
+            <label for="darkModeSwitch" class="switch-label">
+                <span class="switch-ball"></span>
+            </label>
+        </div>
     </nav>
 
-    
     <section class="hero container">
         <div class="hero-text">
             <h3>Hi, I'm Raksa – a Computer Science Student & Aspiring Software Developer</h3>
             <p class="mt-3">"Passionate about creating practical and innovative technology solutions to solve real-world
                 problems."</p>
             <div class="mt-4 d-flex gap-3">
-                <a href="#" class="btn btn-custom">Download CV</a>
-                <a href="#" class="btn btn-outline-info">About Me</a>
+                <a href="Thy_raksa (2).pdf" target="_blank" class="btn btn-primary">
+                    <i class="bi bi-file-earmark-text"></i> See My CV
+                </a>
+                <a href="#about" class="btn btn-outline-info">About Me</a>
             </div>
+
         </div>
-        <img src="image/image.jpg" alt="Profile photo" />
+        <img src="image/image.jpg" alt="Raksa Thy - Profile Photo" />
     </section>
 
-   
-    <section class="container mt-5">
-        <h4>About Me</h4>
+    <!-- about me -->
+    <section class="container mt-5" id="about">
+        <h2>About Me</h2>
         <p>
-            I'm a Computer Science student with a strong interest in developing<br />
-            real-world applications and exploring innovative technologies.<br />
-            I enjoy learning new skills and applying them to create practical and meaningful solutions.
+            I'm a passionate Computer Science student with a strong focus on developing real-world applications
+            using modern technologies. My interests include web development, backend systems, and IoT-based
+            smart solutions.
         </p>
+        <p>
+            I love learning new tools and frameworks like Spring Boot, Firebase, and Python to build
+            practical, user-friendly systems. Whether it's managing data efficiently or automating tasks,
+            I enjoy turning ideas into functional, impactful software.
+        </p>
+        <p>
+            I'm also committed to continuous learning, collaboration, and contributing to tech communities
+            by sharing knowledge, building side projects, and exploring innovative solutions to real-world
+            challenges.
+        </p>
+
+
     </section>
 
-    
-    <section class="container mt-5">
-        <h5 class="text-center fw-bold mb-4">Projects</h5>
+    <section class="container mt-5" id="projects">
+        <h2 class="text-center fw-bold mb-4">Projects</h2>
         <div class="row justify-content-center">
             <div class="col-md-5 project-card mx-3">
-                <h6>Smart Campus Management System<br><small>(Spring Boot + MySQL)</small></h6>
-                <img src="image/project1.jpg" alt="Smart Campus" class="my-3" />
+                <h3>Smart Campus Management System<br><small>(Spring Boot + MySQL)</small></h3>
+                <img src="image/project1.jpg" alt="Smart Campus Management System Project Screenshot" class="my-3" />
+                <a href="project-campus.html" class="btn btn-custom mt-2">See More Detail</a>
             </div>
             <div class="col-md-5 project-card mx-3">
-                <h6>Student Management System<br><small>(Python + SQLite)</small></h6>
-                <img src="image/project2.jpg" alt="Student System" class="my-3" />
+                <h3>Student Management System<br><small>(Python + SQLite)</small></h3>
+                <img src="image/project2.jpg" alt="Student Management System Project Screenshot" class="my-3" />
+                <a href="project-student.html" class="btn btn-custom mt-2">See More Detail</a>
+            </div>
+        </div>
+
+
+    </section>
+
+    <!-- skills -->
+    <section class="container mt-5" id="skills">
+        <h2 class="text-center fw-bold mb-4">Skills</h2>
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <i class="bi bi-code-slash fs-2 text-info"></i>
+                <h5 class="mt-2">Programming Languages</h5>
+                <p>Java, Python, JavaScript, SQL</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="bi bi-box-seam fs-2 text-success"></i>
+                <h5 class="mt-2">Frameworks & Tools</h5>
+                <p>Spring Boot, Firebase, Thymeleaf, Bootstrap</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="bi bi-database fs-2 text-warning"></i>
+                <h5 class="mt-2">Database & Cloud</h5>
+                <p>MySQL, SQLite, Google Sheets, Firebase Firestore</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="bi bi-git fs-2 text-danger"></i>
+                <h5 class="mt-2">Version Control</h5>
+                <p>Git, GitHub</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="bi bi-lightbulb fs-2 text-primary"></i>
+                <h5 class="mt-2">Soft Skills</h5>
+                <p>Problem-solving, Teamwork, Research, UI Design (basic)</p>
             </div>
         </div>
         <div class="text-center mt-4 d-flex justify-content-center gap-4">
-            <a href="#" class="btn btn-custom">See more of my skills</a>
-            <a href="#" class="btn btn-custom">Contact</a>
+            <a href="#skills" class="btn btn-custom">See more of my skills</a>
+            <!-- <a href="#contact" class="btn btn-custom">Contact</a> -->
         </div>
     </section>
 
-    
+    <!-- contact -->
+    <section class="container mt-5" id="contact">
+        <h2 class="mb-3 text-center">Contact</h2>
+        <p class="mb-4 text-center">
+            Have projects in mind or just want to chat? Feel free to reach out via email or connect on social
+            platforms:
+        </p>
+
+        <div class="d-flex flex-wrap justify-content-center gap-4 contact-links">
+            <a href="mailto:raksathy2@gmail.com" target="_blank" class="contact-item">
+                <i class="bi bi-envelope text-secondary"></i> Email
+            </a>
+            <a href="https://t.me/Thyraksa" target="_blank" class="contact-item">
+                <i class="bi bi-telegram text-primary"></i> Telegram
+            </a>
+            <a href="https://www.instagram.com/zingzing233?igsh=MXg0YXI0cGM3bG0yYQ%3D%3D&utm_source=qr" target="_blank"
+                class="contact-item">
+                <i class="bi bi-instagram text-danger"></i> Instagram
+            </a>
+            <a href="https://www.linkedin.com/in/thy-raksa-03a7432b7/" target="_blank" class="contact-item">
+                <i class="bi bi-linkedin text-primary"></i> LinkedIn
+            </a>
+            <a href="https://github.com/SinSin123456" target="_blank" class="contact-item">
+                <i class="bi bi-github"></i> GitHub
+            </a>
+        </div>
+    </section>
+
+
     <footer class="mt-5">
-        Copyright©2025–Thy Raksa
+        Copyright©2025 – Thy Raksa
     </footer>
+
+    <script>
+        const toggle = document.getElementById('darkModeSwitch');
+
+
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            toggle.checked = true;
+        }
+
+        toggle.addEventListener('change', function () {
+            document.body.classList.toggle('dark-mode');
+
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+    </script>
 
 </body>
 
