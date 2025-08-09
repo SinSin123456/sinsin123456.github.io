@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raksa Thy Portfolio</title>
 
     <!-- SEO Meta -->
@@ -26,6 +26,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
         body {
@@ -37,31 +38,52 @@
 
         .navbar {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            padding: 1.5rem 1rem;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
             background-color: #ffffff;
-            transition: background-color 0.3s;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .navbar-brand {
             font-size: 1.8rem;
             font-weight: bold;
-            margin-bottom: 0.5rem;
+            margin: 0;
+            text-decoration: none;
+            color: #000;
         }
 
         .navbar-nav {
             display: flex;
             flex-direction: row;
-            justify-content: center;
+            align-items: center;
             gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .navbar-nav .nav-link {
-            color: #ff4d4d !important;
+            color: #ff4d4d;
             font-weight: 600;
             font-size: 1.2rem;
-            transition: color 0.3s;
+            text-decoration: none;
+            line-height: 1;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #000;
         }
 
         .hero {
@@ -86,7 +108,7 @@
             height: 300px;
             border-radius: 50%;
             object-fit: cover;
-            margin-top: -50px;
+
         }
 
         .btn-custom {
@@ -177,48 +199,60 @@
             color: #ffffff !important;
         }
 
+
         .toggle-switch {
-            opacity: 0;
-            width: 0;
-            height: 0;
-            position: absolute;
+            display: none;
         }
 
+
         .dark-mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            user-select: none;
+            display: flex;
+            align-items: center;
         }
 
         .switch-label {
-            display: block;
-            width: 50px;
-            height: 25px;
-            background-color: #ccc;
-            border-radius: 25px;
             position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            background: #ccc;
+            border-radius: 34px;
             cursor: pointer;
-            transition: background-color 0.3s;
+        }
+
+        .switch-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+        }
+
+        .sun {
+            left: 8px;
+        }
+
+        .moon {
+            right: 8px;
         }
 
         .switch-ball {
-            content: "";
             position: absolute;
             top: 2px;
             left: 2px;
-            width: 21px;
-            height: 21px;
-            background-color: white;
+            width: 30px;
+            height: 30px;
+            background: #fff;
             border-radius: 50%;
             transition: transform 0.3s;
-            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
         }
 
-        .toggle-switch:checked+.switch-label {
-            background-color: #00bfa6;
+         .toggle-switch:checked + .switch-label .switch-ball {
+            transform: translateX(26px);
         }
+
+        /* .toggle-switch:checked+.switch-label {
+            background-color: #00bfa6;
+        } */
 
         .toggle-switch:checked+.switch-label .switch-ball {
             transform: translateX(25px);
@@ -288,6 +322,71 @@
         body.dark-mode .contact-item:hover {
             background-color: #333;
         }
+
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .hero img {
+                margin-top: 30px;
+                width: 300px;
+                height: 300px;
+                object-fit: cover;
+            }
+
+            .mt-4.d-flex.gap-3 {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn.btn-primary,
+            .btn.btn-outline-info {
+                margin-bottom: 10px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .navbar-nav {
+                display: none;
+                flex-direction: column;
+                position: static;
+                transform: none;
+                background-color: #ffffff;
+                width: 100%;
+                padding: 1rem;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                position: absolute;
+                top: 100%;
+                left: 0;
+            }
+
+            .navbar-nav.active {
+                display: flex;
+            }
+
+            .navbar-nav .nav-link {
+                font-size: 1.1rem;
+                padding: 0.5rem 0;
+            }
+
+            .navbar {
+                flex-wrap: wrap;
+            }
+        }
     </style>
 
     <script type="application/ld+json">
@@ -303,20 +402,26 @@
 
 <body>
     <nav class="navbar">
-        <a class="navbar-brand " href="#">RAKSA THY</a>
-        <ul class="navbar-nav ">
+        <a class="navbar-brand" href="#">RAKSA THY</a>
+        <button class="hamburger" aria-label="Toggle menu">☰</button>
+
+        <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="#about">About me</a></li>
             <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
             <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
 
-        <!-- dark mode -->
+        <!-- Dark mode toggle -->
         <div class="dark-mode-toggle">
             <input type="checkbox" id="darkModeSwitch" class="toggle-switch" />
             <label for="darkModeSwitch" class="switch-label">
+                <span class="switch-icon sun"><i class="fa-regular fa-sun"></i></span>
+                <span class="switch-icon moon"><i class="fa-solid fa-moon"></i></span>
                 <span class="switch-ball"></span>
             </label>
         </div>
+
+
     </nav>
 
     <section class="hero container">
@@ -332,7 +437,8 @@
             </div>
 
         </div>
-        <img src="image/image.jpg" alt="Raksa Thy - Profile Photo" />
+        <img src="image/photo_2025-07-30_22-12-47.jpg" alt="Raksa Thy - Profile Photo" />
+
     </section>
 
     <!-- about me -->
@@ -357,6 +463,7 @@
 
     </section>
 
+    <!-- project card -->
     <section class="container mt-5" id="projects">
         <h2 class="text-center fw-bold mb-4">Projects</h2>
         <div class="row justify-content-center">
@@ -370,9 +477,12 @@
                 <img src="image/project2.jpg" alt="Student Management System Project Screenshot" class="my-3" />
                 <a href="project-student.html" class="btn btn-custom mt-2">See More Detail</a>
             </div>
+
+            <div class="text-center mt-4 d-flex justify-content-center gap-4">
+                <a href="https://github.com/SinSin123456" class="btn btn-custom">See more of my projects</a>
+                <!-- <a href="#contact" class="btn btn-custom">Contact</a> -->
+            </div>
         </div>
-
-
     </section>
 
     <!-- skills -->
@@ -461,6 +571,11 @@
             } else {
                 localStorage.setItem('darkMode', 'disabled');
             }
+        });
+
+
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            document.querySelector('.navbar-nav').classList.toggle('active');
         });
     </script>
 
